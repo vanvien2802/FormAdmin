@@ -1,0 +1,31 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ModernUI_FontAw.Model
+{
+    [Table("Computer")]
+    public class Computer
+    {
+        public Computer()
+        {
+            UseComputerHistories = new HashSet<UseComputerHistory>();
+            HistoryAccountUsers =new HashSet<HistoryAccountUser>();
+        }
+        [Key]
+        public int ID_Computer { get; set; }
+
+        [Required]
+        [StringLength(100, MinimumLength = 3, ErrorMessage = "Từ 3 đến  100 ký tự")]
+        [DataType(DataType.Text)]
+        public string Name_PC { get; set; }
+        public int ID_Customer { get; set; }
+        public bool Status { get; set; }
+        public virtual ICollection<UseComputerHistory> UseComputerHistories {get; set;}
+        public virtual ICollection<HistoryAccountUser> HistoryAccountUsers {get; set;}
+    }
+}
